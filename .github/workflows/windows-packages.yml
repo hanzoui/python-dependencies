@@ -48,7 +48,7 @@ jobs:
       - name: Fetch and install Hanzo Studio requirements
         run: |
           .\packaged_env\Scripts\Activate.ps1
-          Invoke-WebRequest -Uri https://raw.githubusercontent.com/hanzoui/studio/master/requirements.txt -OutFile requirements.txt
+          Invoke-WebRequest -Uri https://raw.githubusercontent.com/hanzoai/studio/master/requirements.txt -OutFile requirements.txt
           pip install ${{ inputs.extra_dependencies }} -r requirements.txt
 
       - name: Verify PyTorch installation
@@ -63,7 +63,7 @@ jobs:
         run: |
           .\packaged_env\Scripts\Activate.ps1
           pip install pyinstaller
-          git clone https://github.com/hanzoui/studio --depth 1
+          git clone https://github.com/hanzoai/studio --depth 1
           Copy-Item ${{ inputs.spec_file }} -Destination Hanzo Studio\
           cd Hanzo Studio
           pyinstaller ${{ inputs.spec_file }}
