@@ -52,12 +52,12 @@ jobs:
           git clone --depth 1 https://github.com/hanzoai/taesd
           cp taesd/*.pth ./Hanzo Studio/models/vae_approx/
 
-          mkdir Hanzo Studio_windows_portable
-          mv Hanzo Studio Hanzo Studio_windows_portable
-          mv python_embedded Hanzo Studio_windows_portable
-          "C:\Program Files\7-Zip\7z.exe" a -t7z -m0=lzma2 -mx=8 -mfb=64 -md=32m -ms=on -mf=BCJ2 Hanzo Studio_windows_portable.7z Hanzo Studio_windows_portable
+          mkdir HanzoStudio_windows_portable
+          mv Hanzo Studio HanzoStudio_windows_portable
+          mv python_embedded HanzoStudio_windows_portable
+          "C:\Program Files\7-Zip\7z.exe" a -t7z -m0=lzma2 -mx=8 -mfb=64 -md=32m -ms=on -mf=BCJ2 HanzoStudio_windows_portable.7z HanzoStudio_windows_portable
           
-          cd Hanzo Studio_windows_portable
+          cd HanzoStudio_windows_portable
           python_embedded/python.exe -s Hanzo Studio/main.py --quick-test-for-ci --cpu
 
           cd ../ && ls
@@ -75,5 +75,5 @@ jobs:
             - Hanzo Studio requirements
           draft: false
           prerelease: true
-          artifacts: "Hanzo Studio_windows_portable.7z"
+          artifacts: "HanzoStudio_windows_portable.7z"
           token: ${{ secrets.GITHUB_TOKEN }}
