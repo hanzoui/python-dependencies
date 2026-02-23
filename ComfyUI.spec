@@ -55,7 +55,7 @@ exe = EXE(
     a.scripts,
     [],
     exclude_binaries=True,
-    name='ComfyUI',
+    name='Hanzo Studio',
     debug=False,
     bootloader_ignore_signals=False,
     strip=False,
@@ -75,5 +75,5 @@ coll = COLLECT(
     strip=False,
     upx=True,
     upx_exclude=[],
-    name='ComfyUI',
+    name='Hanzo Studio',
 )

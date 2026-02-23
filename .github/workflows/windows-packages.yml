@@ -6,7 +6,7 @@ on:
         description: 'spec file'
         required: true
         type: string
-        default: "ComfyUI-onefile.spec"
+        default: "Hanzo Studio-onefile.spec"
       python_minor:
         description: 'python minor version'
         required: true
@@ -45,10 +45,10 @@ jobs:
           .\packaged_env\Scripts\Activate.ps1
           pip3 install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu${{ inputs.cu }}
 
-      - name: Fetch and install ComfyUI requirements
+      - name: Fetch and install Hanzo Studio requirements
         run: |
           .\packaged_env\Scripts\Activate.ps1
-          Invoke-WebRequest -Uri https://raw.githubusercontent.com/Comfy-Org/ComfyUI/master/requirements.txt -OutFile requirements.txt
+          Invoke-WebRequest -Uri https://raw.githubusercontent.com/hanzoui/studio/master/requirements.txt -OutFile requirements.txt
           pip install ${{ inputs.extra_dependencies }} -r requirements.txt
 
       - name: Verify PyTorch installation
@@ -63,15 +63,15 @@ jobs:
         run: |
           .\packaged_env\Scripts\Activate.ps1
           pip install pyinstaller
-          git clone https://github.com/Comfy-Org/ComfyUI --depth 1
-          Copy-Item ${{ inputs.spec_file }} -Destination ComfyUI\
-          cd ComfyUI
+          git clone https://github.com/hanzoui/studio --depth 1
+          Copy-Item ${{ inputs.spec_file }} -Destination Hanzo Studio\
+          cd Hanzo Studio
           pyinstaller ${{ inputs.spec_file }}
       
       - name: Zip environment
         shell: bash
         run: |
-          cd ComfyUI
+          cd Hanzo Studio
           echo "Size of dist folder before zipping:"
           du -sh dist
           "C:\Program Files\7-Zip\7z.exe" a -t7z -m0=lzma2 -mx=8 -mfb=64 -md=32m -ms=on -mf=BCJ2 windows_python_env.7z dist
@@ -97,9 +97,9 @@ jobs:
             - Python 3.${{ inputs.python_minor }} virtual environment
             - PyTorch Cuda ${{ inputs.cu }}
             - Spec File ${{ inputs.spec_file }}
-            - ComfyUI requirements
+            - Hanzo Studio requirements
             - Extra dependencies: ${{ inputs.extra_dependencies }}
           draft: false
           prerelease: true
-          artifacts: "ComfyUI/windows_python_env.7z"
+          artifacts: "Hanzo Studio/windows_python_env.7z"
           token: ${{ secrets.GITHUB_TOKEN }}
