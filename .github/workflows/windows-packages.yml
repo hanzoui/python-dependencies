@@ -6,7 +6,7 @@ on:
         description: 'spec file'
         required: true
         type: string
-        default: "Hanzo Studio-onefile.spec"
+        default: "HanzoStudio-onefile.spec"
       python_minor:
         description: 'python minor version'
         required: true
@@ -101,5 +101,5 @@ jobs:
             - Extra dependencies: ${{ inputs.extra_dependencies }}
           draft: false
           prerelease: true
-          artifacts: "Hanzo Studio/windows_python_env.7z"
+          artifacts: "HanzoStudio/windows_python_env.7z"
           token: ${{ secrets.GITHUB_TOKEN }}

@@ -45,12 +45,12 @@ jobs:
           echo 'import site' >> ./python3${{ inputs.python_minor }}._pth
           curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
           ./python.exe get-pip.py
-          ./python.exe -m pip install torch torchvision torchaudio ${{ inputs.xformers }} ${{ inputs.extra_dependencies }} --extra-index-url https://download.pytorch.org/whl/cu${{ inputs.cu }} -r ../Hanzo Studio/requirements.txt pygit2
-          sed -i '1i../Hanzo Studio' ./python3${{ inputs.python_minor }}._pth          
+          ./python.exe -m pip install torch torchvision torchaudio ${{ inputs.xformers }} ${{ inputs.extra_dependencies }} --extra-index-url https://download.pytorch.org/whl/cu${{ inputs.cu }} -r ../HanzoStudio/requirements.txt pygit2
+          sed -i '1i../HanzoStudio' ./python3${{ inputs.python_minor }}._pth          
 
           cd ../
           git clone --depth 1 https://github.com/hanzoai/taesd
-          cp taesd/*.pth ./Hanzo Studio/models/vae_approx/
+          cp taesd/*.pth ./HanzoStudio/models/vae_approx/
 
           mkdir HanzoStudio_windows_portable
           mv Hanzo Studio HanzoStudio_windows_portable
@@ -58,7 +58,7 @@ jobs:
           "C:\Program Files\7-Zip\7z.exe" a -t7z -m0=lzma2 -mx=8 -mfb=64 -md=32m -ms=on -mf=BCJ2 HanzoStudio_windows_portable.7z HanzoStudio_windows_portable
           
           cd HanzoStudio_windows_portable
-          python_embedded/python.exe -s Hanzo Studio/main.py --quick-test-for-ci --cpu
+          python_embedded/python.exe -s HanzoStudio/main.py --quick-test-for-ci --cpu
 
           cd ../ && ls
       - name: Create Release
